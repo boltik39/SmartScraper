@@ -8,9 +8,9 @@
 }
 div.logo{
   font: 60pt/50pt sans-serif;
-  letter-spacing: 0px;
-  margin-bottom: 0pt;
-  word-spacing: 0px;
+  letter-spacing: 0;
+  margin-bottom: 0;
+  word-spacing: 0;
 }
 div.logo a{
   text-decoration: none;
