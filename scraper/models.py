@@ -2,7 +2,6 @@ from django.db import models
 
 
 class DeviceDescription(models.Model):
-    id = models.IntegerField(primary_key=True)
     query = models.TextField
     mttr = models.DecimalField
     mtbf = models.DecimalField
