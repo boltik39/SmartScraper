@@ -1,0 +1,64 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<link href="https://fonts.googleapis.com/css2?family=Nosifer&display=swap" rel="stylesheet">
+<link rel="stylesheet" type="text/css" href="/static/index.css">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Search result</title>
+</head>
+<body>
+   <div class="logo">
+   <a href="/">
+       <span class="s">S</span>
+       <span class="c">c</span>
+       <span class="r">r</span>
+       <span class="a">a</span>
+       <span class="p">p</span>
+       <span class="e">e</span>
+       <span class="rz">r</span>
+   </a>
+   </div>
+<table>
+<tr>
+    <td>Product</td><td>{{name}}</td><td></td>
+</tr>
+<tr>
+    <td>MTTR</td><td>{{mttr}}</td><td>Hours</td>
+</tr>
+<tr>
+    <td>MTBF</td><td>{{mtbf}}</td><td>Hours</td>
+</tr>
+<tr>
+    <td>Failure rate</td><td>{{fail}}</td><td>Hours<sup>-1</sup></td>
+</tr>
+<tr>
+    <td>Failure rate in storage mode</td><td>{{stor_mode}}</td><td>%</td>
+</tr>
+<tr>
+    <td>Storage time</td><td>{{stor_time}}</td><td>Hours</td>
+</tr>
+<tr>
+    <td>Minimal resource</td><td>{{min_res}}</td><td>Hours</td>
+</tr>
+<tr>
+    <td>Gamma percentage resource</td><td>{{gam}}</td><td>Hours</td>
+</tr>
+<tr>
+    <td>Average resource</td><td>{{a_res}}</td><td>Hours</td>
+</tr>
+<tr>
+    <td>Average lifetime</td><td>{{a_life}}</td><td>Years</td>
+</tr>
+<tr>
+    <td>Recovery intensity</td><td>{{rec_inten}}</td><td></td>
+</tr>
+<tr>
+    <td>System reliability</td><td>{{sys_rel}}</td><td>%</td>
+</tr>
+<tr>
+    <td>Score</td><td>{{score}}</td><td>points</td>
+</tr>
+</table>
+</body>
+</html>
+
