@@ -1,5 +1,6 @@
 from django.shortcuts import render
 from scraper.models import Device
+from utils.Googler import Googler
 
 
 def home(request):
@@ -11,18 +12,14 @@ def about(request):
 
 
 def search(request):
-
-    dicty = dict()
     query = request.GET['query']
 
     device_query = Device.objects.filter(name=query)
 
     if device_query:
         dicty = device_query.values()
-
     else:
-        # dicty = search_by_query(query)
-        pass
+        dicty = Googler.search_by_query(query)
     return render(request, 'search_result.html',
                   {'name': dicty[0]['name'],
                    'mttr': dicty[0]['mttr'],
