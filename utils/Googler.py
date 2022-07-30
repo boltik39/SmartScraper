@@ -17,6 +17,7 @@ class Googler:
             if url.startswith("http"):
                 lst.append(url)
         lst = list(filter(None, [s.strip() for s in lst]))
+        print(lst)
         return lst
 
     @staticmethod
@@ -28,7 +29,7 @@ class Googler:
             fnd[link] = Pars().yargy_parser(file_path)
             os.remove(file_path)
         res = StringHelper.finding_num(fnd, query)
-        res['query'] = query
+        res['name'] = query
 
         # patch column names
         res = Googler._patch_dict_keys(res)

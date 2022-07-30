@@ -50,5 +50,5 @@ class FileHelper:
 
                     if text:
                         file.write(text)
-                    os.remove(path_to_pdf)
+                os.remove(path_to_pdf)
         return path_to_file

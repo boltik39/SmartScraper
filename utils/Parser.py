@@ -71,36 +71,98 @@ class Pars:
     )
 
     def yargy_parser(self, path):
-        x_mtbf = rule(self.NUM_MTBF, self.UNIT_mtbf.optional()
-                      ).interpretation(
-            self.RULE.num
+        RULE = fact(
+            'RULE',
+            ['name', 'tresh', 'num']
+        )
+        INT = type('INT')
+        PUNCT = type('PUNCT')
+
+        DOT = or_(eq('.'), eq(','))
+
+        NAME_mtbf = morph_pipeline(
+            [
+                'MTTF',
+                'MTBF',
+                'mean time between',
+                'mean time between failures',
+                'mean time between failure',
+            ]
+        ).interpretation(
+            RULE.name
         )
 
-        x_mttr = rule(self.INT, self.UNIT_mttr.optional()
-                      ).interpretation(
-            self.RULE.num
+        NAME_mttr = morph_pipeline(
+            [
+                'MTTR',
+                'mean time to',
+                'Mean Time To Repair',
+                'repair time',
+            ]
+        ).interpretation(
+            RULE.name
         )
 
-        tresh = rule(and_(not_(eq(self.NUM_MTBF)), or_(not_(eq(self.NAME_mttr)),
-                                                       not_(eq(
-                                                           self.NAME_mtbf))),
-                          not_(eq(self.UNIT_mtbf)), not_(eq(self.DOT)),
-                          not_(eq(self.INT)), not_(eq(x_mttr)),
-                          not_(eq(x_mtbf)))
+        NUM_MTBF = or_(rule(INT, DOT, INT), rule(INT),
+                       rule(INT, DOT, INT, DOT, INT),
+                       rule(INT, INT), rule(INT, INT, INT))
+
+        UNIT_mtbf = morph_pipeline(
+            [
+                'year',
+                'years',
+                'hour',
+                'hours',
+                'год',
+                'час',
+                'h',
+                'ч',
+                'тыс. часов'
+            ]
+        )
+
+        UNIT_mttr = morph_pipeline(
+            [
+                'hour',
+                'hours',
+                'час',
+                'h',
+                'ч',
+                'мин',
+                'minutes',
+                'minute',
+                'минут'
+            ]
+        )
+
+        X_mtbf = rule(NUM_MTBF, UNIT_mtbf.optional()
+                      ).interpretation(
+            RULE.num
+        )
+
+        X_mttr = rule(INT, UNIT_mttr.optional()
+                      ).interpretation(
+            RULE.num
+        )
+
+        TRESH = rule(and_(not_(eq(NUM_MTBF)), or_(not_(eq(NAME_mttr)),
+                                                  not_(eq(NAME_mtbf))),
+                          not_(eq(UNIT_mtbf)), not_(eq(DOT)),
+                          not_(eq(INT)), not_(eq(X_mttr)), not_(eq(X_mtbf)))
                      ).interpretation(
-           self.RULE.tresh
+            RULE.tresh
         )
 
-        rule_1 = (rule(self.NAME_mtbf, (tresh.optional()).repeatable(),
-                       x_mtbf).repeatable()
+        rule_1 = (rule(NAME_mtbf, (TRESH.optional()).repeatable(),
+                       X_mtbf).repeatable()
                   ).interpretation(
-            self.RULE
+            RULE
         )
 
-        rule_2 = (rule(self.NAME_mttr, (tresh.optional()).repeatable(),
-                       x_mttr).repeatable()
+        rule_2 = (rule(NAME_mttr, (TRESH.optional()).repeatable(),
+                       X_mttr).repeatable()
                   ).interpretation(
-            self.RULE
+            RULE
         )
 
         f = open(path, 'r', encoding='utf-8')
@@ -112,49 +174,49 @@ class Pars:
         # Temporary workaround. Remove it as the performance grows
         n = 10000
         text = [
-            line[i - 5 if i - 5 > 0 else 0:
-                 i + n + 5 if i + n + 5 < len(line) else len(line) - 1]
-            for i in range(0, len(line), n)]
-        measure = rule(or_(x_mttr, x_mtbf, self.NAME_mttr, self.NAME_mtbf))
+            line[i - 5 if i - 5 > 0 else 0:i + n + 5 if i + n + 5 < len(line)
+            else len(line) - 1] for i in range(0, len(line), n)]
+        MEASURE = rule(or_(X_mttr, X_mtbf, NAME_mttr, NAME_mtbf))
         new_line = []
         # Parser #1 text preprocessing
-        parser = Parser(measure)
+        parser = Parser(MEASURE)
         for line in text:
             matches = list(parser.findall(line))
             spans = [list(_.span) for _ in matches]
             new_span = [0, 0]
             if spans != [] and len(spans) >= 2:
-                mini = 1000000
-                maxi = 0
                 for i in range(0, len(spans) - 1, 1):
+                    mini = 1000000
+                    maxi = 0
                     if spans[i][0] < mini:
                         new_span[0] = spans[i][0]
                         mini = spans[i][0]
                     if spans[i + 1][1] > maxi:
                         new_span[1] = spans[i + 1][1]
                         maxi = spans[i + 1][1]
-                    for j in range(new_span[0], new_span[1]):
-                        new_line.append(line[j])
+                    for i in range(new_span[0], new_span[1]):
+                        new_line.append(line[i])
                     new_line.append(' \n ')
         new_line = ''.join(new_line)
         new_line = new_line.split('\n')
-        lst = []
-        measure = or_(rule_1, rule_2).interpretation(
-            self.RULE
+        LIST = []
+        MEASURE = or_(rule_1, rule_2).interpretation(
+            RULE
         )
         # Parser #2 Parsing reliability metrics.
-        parser = Parser(measure)
+        parser = Parser(MEASURE)
         for line in new_line:
             try:
                 matches = list(parser.findall(line))
                 spans = [_.span for _ in matches]
-                if spans:
+                if spans != []:
                     if matches:
                         for match in matches:
-                            lst.append(match.fact)
+                            LIST.append(match.fact)
             except:
                 print(
-                    'Yargy failure: you normally '
-                    'don`t need to report that to us.')
-        print(lst)
-        return lst
+                    'Yargy failure: you normally don`t need to report that to us.')
+        print(LIST)
+        f.close()
+        return LIST
+
