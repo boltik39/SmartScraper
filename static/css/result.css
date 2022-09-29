@@ -1,0 +1,101 @@
+@import url("https://fonts.googleapis.com/css?family=Rubik+One&subset=latin,cyrillic");
+@import url("https://fonts.googleapis.com/css2?family=Roboto&display=swap");
+
+.body{
+    background: rgb(228, 228, 230);
+}
+
+.navbar{
+    background: rgb(21, 18, 37);
+    padding: 10px 10px 10px;
+    position: fixed;
+    top: 0;
+    left: 0;
+    right: 0;
+    z-index: 2;
+    display: inline-flex;
+}
+#table{
+    margin-top: 130px;
+}
+
+#query{
+    font-size: 15px;
+    width: 50%;
+    box-sizing: border-box;
+    border-radius: 5px;
+    border: none;
+    padding-left: 10px;
+    outline: none;
+    font-family: inherit; 
+}
+#upld{
+    font-size: 15px;
+    width: 20%;
+    box-sizing: border-box;
+    border-radius: 5px;
+    border: none;
+    padding-left: 10px;
+    outline: none;
+    font-family: inherit;
+}
+#srch{
+    font-size: 15px;
+    width: 20%;
+    box-sizing: border-box;
+    border-radius: 5px;
+    border: none;
+    padding-left: 10px;
+    outline: none;
+    font-family: inherit;
+}
+
+.btn{
+    position: fixed;
+    top: 50px;
+    left: 10px;
+}
+.btnp{
+    background: rgb(142, 142, 143);
+    padding: 15px 20px;
+    color: #000;
+    border: none;
+    cursor: pointer;
+    border-radius: 10px;
+    font-family: inherit;
+    font-size: 30px;
+    margin-right: 15px;
+}
+
+.btnup{
+    background: rgb(142, 142, 143);
+    padding: 15px 20px;
+    color: #000;
+    border: none;
+    cursor: pointer;
+    border-radius: 10px;
+    font-family: inherit;
+    font-size: 30px;
+    margin-right: 15px;
+
+}
+
+.btndn{
+    background: rgb(142, 142, 143);
+    padding: 15px 20px;
+    color: #000;
+    border: none;
+    cursor: pointer;
+    border-radius: 10px;
+    font-family: inherit;
+    font-size: 30px;
+}
+.table{
+    width: 100%;
+}
+.table td{
+    padding: 10px 15px;
+}
+.table tr:hover{
+    background-color: #a4b4ce;
+}

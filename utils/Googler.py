@@ -13,7 +13,7 @@ class Googler:
         Returns list of URLS
         """
         lst = []
-        for url in search(query, stop=20):
+        for url in search(query, stop=8):
             if url.startswith("http"):
                 lst.append(url)
         lst = list(filter(None, [s.strip() for s in lst]))

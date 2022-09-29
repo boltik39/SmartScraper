@@ -3,7 +3,7 @@
 <html lang="en">
 <head>
 <link href="https://fonts.googleapis.com/css2?family=Nosifer&display=swap" rel="stylesheet">
-<link rel="stylesheet" href="{% static 'css/index.css'%}" type="text/css">
+<link rel="stylesheet" href="{% static '/SmartScraper/static/css/index.css' %}" type="text/css">
 <meta name="viewport" content="width=device-width, initial-scale=1">
 <title>Scraper</title>
 </head>
@@ -18,11 +18,11 @@
        <span class="e">e</span>
        <span class="rz">r</span>
    </div>
-<form action="/search" method="get">
+<form action="search" method="get">
   <input type="text" placeholder="Device" id="query" name="query" required><br>
   <input type="submit" value="Search">
 </form>
-<form action="/search" method="post" enctype="multipart/form-data">
+<form action="search/" method="post" enctype="multipart/form-data">
   {% csrf_token %}
   <input type="file" title="Upload excel file" name="excel_file" required>
   <input type="submit" value="Upload">
