@@ -1,4 +1,5 @@
 import os
+from urllib import request
 
 from utils.StringHelper import StringHelper
 from utils.HttpMethodsHelper import HttpMethodHelper
@@ -8,6 +9,7 @@ from pdfminer.converter import TextConverter
 from pdfminer.pdfinterp import PDFPageInterpreter
 from pdfminer.pdfinterp import PDFResourceManager
 from pdfminer.pdfpage import PDFPage
+from openpyxl import load_workbook
 
 
 class FileHelper:
@@ -52,3 +54,16 @@ class FileHelper:
                         file.write(text)
                 os.remove(path_to_pdf)
         return path_to_file
+
+    def get_products_from_excel(excel_file):
+        wb = load_workbook(excel_file)
+        worksheet = wb["Sheet1"]
+        excel_data = list()
+        col_names = {}
+        current = 0
+        for col in worksheet.iter_cols(1, worksheet.max_column):
+            col_names[col[0].value] = current
+            current += 1
+        for row_cells in worksheet.iter_rows(min_row=2):
+            excel_data.append(row_cells[col_names['Product']].value)
+        return excel_data
