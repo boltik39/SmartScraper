@@ -1,26 +1,28 @@
-{% load static %}
 <!DOCTYPE html>
 <html lang="en">
 <head>
     <link href="https://fonts.googleapis.com/css2?family=Nosifer&display=swap" rel="stylesheet">
-    <link rel="stylesheet" type="text/css" href="{% static '/SmartScraper/static/css/result.css' %}">
+    <link rel="stylesheet" href="../static/css/result.css">
     <meta name="viewport" content="width=device-width, initial-scale=1">
     <title>SmartScraper</title>
 </head>
 <body class="body">
     <nav class="navbar">
-        <form action="search/" method="post" enctype="multipart/form-data">
+        <h1 class="p1">Smart</h1><h1 class="p2">Scraper</h1>
+        <form method="post" enctype="multipart/form-data" id="file-form">
             {% csrf_token %}
             <input type="file" title="Upload excel file" name="excel_file" required>
             <input type="submit" id="upld" value="Upload">
         </form>
-        <form action="search" method="get">
+        <form method="get" id="query-form">
             <input type="text" placeholder="Device" id="query" name="query" required><br>
             <input type="submit" id="srch" value="Search">
         </form>
     </nav>
     <div class="btn">
-        <button class="btnp">+</button>
+        <form action="{% url 'export_devices_to_xlsx' %}" method="get">
+            <button class="exportdev">Export to XLSX</button>
+        </form>
         <button class="btnup">↑</button>
         <button class="btndn">↓</button>
     </div>

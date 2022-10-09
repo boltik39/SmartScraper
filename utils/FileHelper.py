@@ -1,5 +1,5 @@
 import os
-from urllib import request
+from urllib import request, response
 
 from utils.StringHelper import StringHelper
 from utils.HttpMethodsHelper import HttpMethodHelper
@@ -9,7 +9,7 @@ from pdfminer.converter import TextConverter
 from pdfminer.pdfinterp import PDFPageInterpreter
 from pdfminer.pdfinterp import PDFResourceManager
 from pdfminer.pdfpage import PDFPage
-from openpyxl import load_workbook
+from openpyxl import load_workbook, Workbook
 
 
 class FileHelper:
@@ -67,3 +67,57 @@ class FileHelper:
         for row_cells in worksheet.iter_rows(min_row=2):
             excel_data.append(row_cells[col_names['Product']].value)
         return excel_data
+
+    def export_products_to_xlsx(devices):
+        workbook = Workbook()
+        worksheet = workbook.active
+        worksheet.title = 'Devices'
+
+        columns = [
+            'Name',
+            'MTTR',
+            'MTBF',
+            'Failure rate',
+            'Failure rate in storage mode',
+            'Storage time',
+            'Minimal resource',
+            'Gamma percentage resource',
+            'Average resource',
+            'Average lifetime',
+            'Recovery intensity',
+            'System reliability',
+            'Score',
+            'Link'
+        ]
+
+        row_num = 1
+
+        for col_num, column_title in enumerate(columns, 1):
+            cell = worksheet.cell(row=row_num, column=col_num)
+            cell.value = column_title
+        
+        for device in devices:
+            row_num += 1
+
+            row = [
+                device.name,
+                device.mttr,
+                device.mtbf,
+                device.failure_rate,
+                device.failure_rate_in_storage_mode,
+                device.storage_time,
+                device.minimal_resource,
+                device.gamma_percentage_resource,
+                device.average_resource,
+                device.average_lifetime,
+                device.recovery_intensity,
+                device.system_reliability,
+                device.score,
+                device.link,
+            ]
+
+            for col_num,cell_value in enumerate(row, 1):
+                cell = worksheet.cell(row=row_num,column=col_num)
+                cell.value = cell_value
+        
+        return workbook

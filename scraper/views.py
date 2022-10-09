@@ -1,4 +1,7 @@
+from datetime import datetime
+from urllib import response
 from django.shortcuts import render
+from django.http import HttpResponse
 from scraper.models import Device
 from utils.Googler import Googler
 from utils.FileHelper import FileHelper
@@ -13,8 +16,8 @@ def about(request):
 
 
 def search(request):
-    devices = []
     queries = []
+    device_query = Device()
     if request.method == "GET":
         query = request.GET['query']
         queries.append(query)
@@ -24,7 +27,6 @@ def search(request):
     for item in queries:
         try:
             device_query = Device.objects.get(name=item)
-            print(item)
         except Device.DoesNotExist:
             dicty = Googler.search_by_query(item)
             device_query = Device(name=dicty['name'], mttr=dicty['mttr'], 
@@ -38,9 +40,18 @@ def search(request):
                                         recovery_intensity=dicty['recovery_intensity'],
                                         system_reliability=dicty['system_reliability'],
                                         score=dicty['score'], link=dicty['links'][0])
-            device_query.save()
-        finally:
-            devices.append(device_query)
-            print(devices)
+            device_query.save(using='default')
+            # device_query.save(using='local')
 
-    return render(request, 'search_result.html', {"devices" : devices})
+    return render(request, 'search_result.html', {"devices" : Device.objects.using('default').all()})
+
+
+def export_devices_to_xlsx(request):
+    devices = Device.objects.using('default').all()
+    response = HttpResponse(
+        content_type='application/vnd.openxmlformats-officedocument.spreadsheetml.sheet',)
+    response['Content-Disposition'] = 'attachment; filename={time}-devices.xlsx'.format(time=datetime.now().strftime('%H-%M-%S'),
+    )
+    wb = FileHelper.export_products_to_xlsx(devices)
+    wb.save(response)
+    return response

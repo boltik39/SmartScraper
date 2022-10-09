@@ -19,6 +19,26 @@
     margin-top: 130px;
 }
 
+.p1{
+    font-family: 'Rubik One', sans-serif;
+    font-size: 20px;
+    color: #4b4646;
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+    display: table;
+    margin-right: 20px;
+}
+
+.p2{
+    font-family: 'Rubik One', sans-serif;
+    font-size: 20px;
+    color: #9c1919;
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+    display: table;
+    margin-right: 20px;
+}
+
 #query{
     font-size: 15px;
     width: 50%;
@@ -55,7 +75,7 @@
     top: 50px;
     left: 10px;
 }
-.btnp{
+.exportdev{
     background: rgb(142, 142, 143);
     padding: 15px 20px;
     color: #000;
