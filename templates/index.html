@@ -1,33 +1,37 @@
-{% load static %}
 <!DOCTYPE html>
 <html lang="en">
 <head>
-<link href="https://fonts.googleapis.com/css2?family=Nosifer&display=swap" rel="stylesheet">
-<link rel="stylesheet" href="{% static '/SmartScraper/static/css/index.css' %}" type="text/css">
-<meta name="viewport" content="width=device-width, initial-scale=1">
-<title>Scraper</title>
+  <meta charset="UTF-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <link rel="stylesheet" href="../static/css/index.css">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>SmartScraper</title>
 </head>
-<body> 
-<div id="inner">
-   <div class="logo">
-       <span class="s">S</span>
-       <span class="c">c</span>
-       <span class="r">r</span>
-       <span class="a">a</span>
-       <span class="p">p</span>
-       <span class="e">e</span>
-       <span class="rz">r</span>
-   </div>
-<form action="search" method="get">
-  <input type="text" placeholder="Device" id="query" name="query" required><br>
-  <input type="submit" value="Search">
-</form>
-<form action="search/" method="post" enctype="multipart/form-data">
-  {% csrf_token %}
-  <input type="file" title="Upload excel file" name="excel_file" required>
-  <input type="submit" value="Upload">
-</form>
-</div>
+<body class="body"> 
+  <div class="name">
+    <h1>SmartScraper</h1>
+  </div>
+  <div>
+    <div>
+      <form action="search" method="get">
+        <div class="searchget">
+          <div class="srchget">
+            <input class="form-input" type="text" placeholder="Device" id="query" name="query" required><br>
+          </div>
+          <div class="srchget">
+            <button class="btn" type="submit" value="Search">Search</button>
+          </div>
+        </div>
+      </form>
+      <div class="srch">
+        <form action="search/" method="post" enctype="multipart/form-data">
+          {% csrf_token %}
+          <input type="file" title="Upload excel file" name="excel_file" required>
+          <input type="submit" value="Upload">
+        </form>
+      </div>
+    </div>
+  </div>
 <footer><a href="about">About</a></footer>
 </body>
 </html>

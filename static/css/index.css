@@ -1,43 +1,58 @@
-#inner {
-  display: inline-block;
-  position: absolute;
-  top: 50%;
-  left: 50%;
-  transform: translate(-50%, -50%);
+@import url('https://fonts.googleapis.com/css?family=Rubik+One&subset=latin,cyrillic');
+@import url('https://fonts.googleapis.com/css2?family=Roboto&display=swap');
+
+.body{
+  background: rgb(21, 18, 37);
+}
+
+.name{
+  font-family: 'Rubik One', sans-serif;
+  font-size: 50px;
+  text-transform: uppercase;  
+  background: linear-gradient(45deg, #978f8f 33%, #c11111 66%, #8AA9D6);
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+  color: #0B2349;
+  display: table;
+  margin: 5px auto;
+}
+.input-group{
+  font-family:'Roboto', sans-serif;
   text-align: center;
 }
-div.logo{
-  font: 60pt/50pt sans-serif;
-  letter-spacing: 0;
-  margin-bottom: 0;
-  word-spacing: 0;
+.input-group .srchget{
+ display: block;
+ margin: 5px auto;
+ width: 50%; 
 }
-div.logo a{
-  text-decoration: none;
-}
-div.logo span{
-  margin-left: -0.2em;
-  margin-right: -0.2em;
+
+.srchget input{
+  font-size: 20px;
+  width: 100%;
+  box-sizing: border-box;
+  border-radius: 5px;
+  border: none;
+  padding: 10px 10px 10px;
+  outline: none;
+  font-family: inherit;
   display: inline-block;
-  font-family: 'Nosifer', cursive;
 }
-input[type=text], input[type=file]{
-  margin-top:5%;
-  margin-bottom:3%;
+.srchget input:hover{
+  opacity: 0.8;
+  color: rgb(26, 22, 22);
 }
-input[type="button"], input[type="submit"] {
-  width: 10em;
-  height: 2em;
+
+.btn{
+  background: white;
+    padding: 15px 20px;
+    color: black;
+    border: none;
+    cursor: pointer;
+    border-radius: 5px;
+    font-family: inherit;
+    display: inline-block;
 }
-span.s{color:#002F76;}
-span.c{color:#003191;}
-span.r{color:#5164FF;}
-span.a{color:#96BDFF;}
-span.p{color:#bcabff;}
-span.e{color:#C46DFF;}
-span.rz{color:#8928FF;}
-footer{
-  position: absolute;
-  bottom: 0.4em;
-  right: 0.4em;
-}
+.btn:hover{
+  opacity: 0.8;
+  color: rgb(26, 22, 22);
+}  
