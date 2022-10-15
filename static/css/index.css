@@ -16,15 +16,33 @@
   display: table;
   margin: 5px auto;
 }
-.input-group{
+.searchget{
+  display: block;
   font-family:'Roboto', sans-serif;
   text-align: center;
 }
-.input-group .srchget{
- display: block;
- margin: 5px auto;
- width: 50%; 
+.searchget .form-input{
+ width: 40%; 
 }
+
+.btn{
+
+    position: absolute;
+    background: white;
+    margin-left: 5px;
+      padding: 14px 20px;
+      color: black;
+      border: none;
+      cursor: pointer;
+      border-radius: 5px;
+      font-family: inherit;
+      display: inline-block;
+  }
+ 
+  .btn:hover{
+    opacity: 0.8;
+    color: rgb(26, 22, 22);
+  }  
 
 .srchget input{
   font-size: 20px;
@@ -42,17 +60,53 @@
   color: rgb(26, 22, 22);
 }
 
-.btn{
-  background: white;
-    padding: 15px 20px;
-    color: black;
-    border: none;
-    cursor: pointer;
-    border-radius: 5px;
-    font-family: inherit;
-    display: inline-block;
+.srch{
+    display: block;
+    font-family:'Roboto', sans-serif;
+    text-align: center;
 }
-.btn:hover{
-  opacity: 0.8;
-  color: rgb(26, 22, 22);
-}  
+.file{
+    background: white;
+    margin-top: 5px;
+      padding: 11px 20px;
+      color: black;
+      border: none;
+      cursor: pointer;
+      border-radius: 5px;
+      font-family: inherit;
+      display: inline-block; 
+}
+
+.btn2{
+
+    position: absolute;
+    background: white;
+    margin-top: 5px;
+    margin-left: 5px;
+      padding: 14px 20px;
+      color: black;
+      border: none;
+      cursor: pointer;
+      border-radius: 5px;
+      font-family: inherit;
+      display: inline-block;
+  }
+ 
+  .btn:hover{
+    opacity: 0.8;
+    color: rgb(26, 22, 22);
+  }  
+.footer{
+    margin-top: 5px;
+    text-align: center;
+    
+}
+a{
+    color:#c11111;
+    text-decoration: none;
+    transition: all .2s;
+}
+a:hover{
+    color:rgb(217, 202, 202);
+    font-size: 2rem;
+}
