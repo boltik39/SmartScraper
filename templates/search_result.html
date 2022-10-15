@@ -8,14 +8,13 @@
 </head>
 <body class="body">
     <nav class="navbar">
-        <h1 class="p1">Smart</h1><h1 class="p2">Scraper</h1>
+        <h1>SmartScraper</h1>
         <form method="post" enctype="multipart/form-data" id="file-form">
-            {% csrf_token %}
-            <input type="file" title="Upload excel file" name="excel_file" required>
+            <input class="file"type="file" title="Upload excel file" name="excel_file" required>
             <input type="submit" id="upld" value="Upload">
         </form>
         <form method="get" id="query-form">
-            <input type="text" placeholder="Device" id="query" name="query" required><br>
+            <input type="text" placeholder="Device" id="query" name="query" required>
             <input type="submit" id="srch" value="Search">
         </form>
     </nav>
