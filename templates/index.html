@@ -16,22 +16,19 @@
       <form action="search" method="get">
         <div class="searchget">
           <div class="srchget">
-            <input class="form-input" type="text" placeholder="Device" id="query" name="query" required><br>
-          </div>
-          <div class="srchget">
+            <input class="form-input" type="text" placeholder="Device" id="query" name="query" required>
             <button class="btn" type="submit" value="Search">Search</button>
           </div>
         </div>
       </form>
       <div class="srch">
         <form action="search/" method="post" enctype="multipart/form-data">
-          {% csrf_token %}
-          <input type="file" title="Upload excel file" name="excel_file" required>
-          <input type="submit" value="Upload">
+          <input class="file" type="file" title="Upload excel file" name="excel_file" required>
+          <input class="btn2" type="submit" value="Upload">
         </form>
       </div>
     </div>
   </div>
-<footer><a href="about">About</a></footer>
+<footer class="footer"><a href="about">About</a></footer>
 </body>
 </html>
