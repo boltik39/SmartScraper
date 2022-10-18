@@ -1,8 +1,15 @@
 @import url('https://fonts.googleapis.com/css?family=Rubik+One&subset=latin,cyrillic');
 @import url('https://fonts.googleapis.com/css2?family=Roboto&display=swap');
 
+.coddy{
+  background:rgb(196, 188, 188);
+  margin-left: 0px;
+  margin-right: 0px;
+  margin-top: 0px;
+}
 .body{
   background: rgb(21, 18, 37);
+
 }
 
 .name{
@@ -68,6 +75,7 @@
 .file{
     background: white;
     margin-top: 5px;
+    margin-bottom: 80px;
       padding: 11px 20px;
       color: black;
       border: none;
@@ -75,6 +83,10 @@
       border-radius: 5px;
       font-family: inherit;
       display: inline-block; 
+}
+.file:hover{
+  opacity: 0.8;
+  color: rgb(26, 22, 22);
 }
 
 .btn2{
@@ -91,11 +103,49 @@
       font-family: inherit;
       display: inline-block;
   }
+ .btn2:hover{
+  opacity: 0.8;
+  color: rgb(26, 22, 22);
+ }
  
   .btn:hover{
     opacity: 0.8;
     color: rgb(26, 22, 22);
   }  
+
+  .exportdev{
+    background: rgb(142, 142, 143);
+    padding: 15px 20px;
+    margin-top:5px;
+    margin-left: 5px;
+    margin-bottom: 5px;
+    color: #000;
+    border: none;
+    cursor: pointer;
+    border-radius: 10px;
+    font-family: inherit;
+    font-size: 30px;
+    margin-right: 15px;
+    display: inline;
+  }
+  .exportdev:hover{
+    opacity: 0.8;
+    color: rgb(26, 22, 22);
+  }
+
+  .table{
+    width: 100%;
+    border-collapse: collapse;
+  }
+  .table td{
+    padding: 10px 15px;
+  }
+  .table tr:hover{
+    background-color: #a4b4ce;
+  }
+  th, td{
+    border: 1px solid black;
+  }
 .footer{
     margin-top: 5px;
     text-align: center;
@@ -107,6 +157,8 @@ a{
     transition: all .2s;
 }
 a:hover{
-    color:rgb(217, 202, 202);
+    color:rgb(48, 39, 81);
     font-size: 2rem;
 }
+
+
