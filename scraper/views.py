@@ -27,7 +27,7 @@ def search(request):
 
     for item in queries:
         try:
-            device_query = Device.objects.get(name=item)
+            device_query = Device.objects.using('default').get(name=item)
             __DEVICE_QUERIES.append(device_query)
         except Device.DoesNotExist:
             dicty = Googler.search_by_query(item)
