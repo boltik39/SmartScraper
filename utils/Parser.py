@@ -219,4 +219,3 @@ class Pars:
         print(LIST)
         f.close()
         return LIST
-

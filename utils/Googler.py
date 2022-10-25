@@ -23,10 +23,13 @@ class Googler:
     @staticmethod
     def search_by_query(query: str):
         links = Googler.google(query + ' mtbf')
+        links_with_results = []
         fnd = dict()
         for link in links:
             file_path = FileHelper.transform_link_content_to_txt(link)
             fnd[link] = Pars().yargy_parser(file_path)
+            if fnd[link]:
+                links_with_results.append(link)
             os.remove(file_path)
         res = StringHelper.finding_num(fnd, query)
         res['name'] = query
@@ -39,7 +42,7 @@ class Googler:
             print("Nothing to save")
             return res
 
-        res['links'] = links
+        res['links'] = links_with_results
         return res
 
     @staticmethod

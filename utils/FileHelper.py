@@ -18,16 +18,20 @@ class FileHelper:
         path_to_file = StringHelper.get_random_path("txt")
         with open(path_to_file, "w", encoding='utf-8') as file:
             if 'html' in HttpMethodHelper.get_link_content_type(link):
+                print("Andrew here")
                 if 'charset' in HttpMethodHelper.get_link_content_type(link):
                     encoding = HttpMethodHelper.get_link_content_encoding(link)
+                    print("Andrew here 2")
                 else:
                     encoding = None
+                    print("Andrew here 3")
                 parser = 'html.parser'
                 soup = BeautifulSoup(HttpMethodHelper.get_link_content(link),
                                      parser,
                                      from_encoding=encoding)
                 file.write(soup.getText())
             elif 'pdf' in HttpMethodHelper.get_link_content_type(link):
+                print("Andrew here 345")
                 path_to_pdf = StringHelper.get_random_path("pdf")
                 with open(path_to_pdf, "wb") as f:
                     f.write(HttpMethodHelper.get_link_content(link))
@@ -53,6 +57,7 @@ class FileHelper:
                     if text:
                         file.write(text)
                 os.remove(path_to_pdf)
+        print("Andrew here finish")
         return path_to_file
 
     def get_products_from_excel(excel_file):
