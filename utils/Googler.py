@@ -4,7 +4,6 @@ from utils.Parser import Pars
 import os
 from utils.StringHelper import StringHelper
 
-
 class Googler:
     @staticmethod
     def google(query):

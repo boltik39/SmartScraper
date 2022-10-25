@@ -10,7 +10,7 @@ __DEVICE_QUERIES = []
 
 
 def home(request):
-    return render(request, 'index.html')
+    return render(request, 'search_result.html')
 
 
 def about(request):
@@ -47,13 +47,12 @@ def search(request):
                                         score=dicty['score'], link=links)
             device_query.save(using='default')
             __DEVICE_QUERIES.append(device_query)
-            # device_query.save(using='local')
-
+            device_query.save(using='local')
     return render(request, 'search_result.html', {"devices": __DEVICE_QUERIES})
 
 
 def export_devices_to_xlsx(request):
-    devices = Device.objects.using('default').all()
+    devices = Device.objects.using('local').all()
     response = HttpResponse(
         content_type='application/vnd.openxmlformats-officedocument.spreadsheetml.sheet',)
     response['Content-Disposition'] = 'attachment; filename={time}-devices.xlsx'.format(time=datetime.now().strftime('%H-%M-%S'),

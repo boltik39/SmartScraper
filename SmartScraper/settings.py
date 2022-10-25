@@ -79,6 +79,14 @@ WSGI_APPLICATION = 'SmartScraper.wsgi.application'
 
 DATABASES = {
     'default': {
+        "ENGINE": "django.db.backends.postgresql_psycopg2",
+        'NAME': 'd48q13ts47s3gm',
+        'USER': 'jpqojrvasxjuxd',
+        'PASSWORD': '67f7c5f54b78823f6c8d9c80b5691a77c88c82ce4da0f99a262273ae80338c33',
+        'HOST': 'ec2-99-81-68-240.eu-west-1.compute.amazonaws.com',
+        'PORT': '5432',
+    }, 
+    'local': {
         'ENGINE': 'django.db.backends.sqlite3',
         'NAME': str(os.path.join(BASE_DIR, 'db.sqlite3')),
     }

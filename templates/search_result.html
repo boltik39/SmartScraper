@@ -9,11 +9,12 @@
 <body class="body">
     <nav class="navbar">
         <h1>SmartScraper</h1>
-        <form method="post" enctype="multipart/form-data" id="file-form">
+        <form action="{% url 'search' %}" method="post" enctype="multipart/form-data" id="file-form">
+            {% csrf_token %}
             <input class="file"type="file" title="Upload excel file" name="excel_file" required>
             <input type="submit" id="upld" value="Upload">
         </form>
-        <form method="get" id="query-form">
+        <form action="{% url 'search' %}" method="get" id="query-form">
             <input type="text" placeholder="Device" id="query" name="query" required>
             <input type="submit" id="srch" value="Search">
         </form>
