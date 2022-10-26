@@ -1,0 +1,43 @@
+@import url('https://fonts.googleapis.com/css?family=Rubik+One&subset=latin,cyrillic');
+@import url('https://fonts.googleapis.com/css2?family=Roboto&display=swap');
+
+.coddy{
+  background:rgb(196, 188, 188);
+  margin-left: 0px;
+  margin-right: 0px;
+  margin-top: 0px;
+}
+.body{
+  background: rgb(21, 18, 37);
+
+}
+
+.name{
+  font-family: 'Rubik One', sans-serif;
+  font-size: 50px;
+  text-transform: uppercase;  
+  background: linear-gradient(45deg, #978f8f 33%, #c11111 66%, #8AA9D6);
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+  color: #0B2349;
+  display: table;
+  margin: 5px auto;
+}
+
+div.d1 {
+    position: relative;
+    margin: 0 auto;
+    top: 50%;
+    width: 50%;
+    -webkit-transform: translateY(-50%);
+    -ms-transform: translateY(-50%);
+    transform: translateY(-50%);
+}
+
+#div_id_username label{
+  color:white;
+}
+
+#div_id_password label{
+  color:white;
+}

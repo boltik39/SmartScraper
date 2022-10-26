@@ -2,20 +2,37 @@ from datetime import datetime
 from urllib import response
 from django.shortcuts import render
 from django.http import HttpResponse
+from django.contrib.auth.decorators import login_required
+from .forms import LoginForm
 from scraper.models import Device
 from utils.Googler import Googler
 from utils.FileHelper import FileHelper
+from django.contrib.auth.views import LoginView
+from django.urls import reverse_lazy
 
 __DEVICE_QUERIES = []
 
+class LoginUser(LoginView):
+    template_name = 'login.html'
+    authentication_form = LoginForm
+    def get_context_data(self, *, object_list=None, **kwargs):
+        context = super(LoginUser, self).get_context_data(**kwargs)
+        context['title'] = 'Авторизация'
+        return context
+    def get_success_url(self):
+        return reverse_lazy('scraper')
 
 def home(request):
-    return render(request, 'search_result.html')
+    context = {}
+    context['form'] = LoginForm()
+    return render(request, 'login.html', context)
 
 
 def about(request):
     return render(request, 'about.html')
 
+def scraper(request):
+    return render(request, 'search_result.html')
 
 def search(request):
     queries = []
