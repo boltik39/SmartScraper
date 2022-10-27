@@ -81,6 +81,22 @@
     display: inline-block;
   }
 
+.btn_add{
+    position: absolute;
+    background: white;
+    right: 213px;
+    margin-top: 5px;
+    margin-right: 5px;
+    margin-left: 5px;
+    padding: 14px 20px;
+    color: black;
+    border: none;
+    cursor: pointer;
+    border-radius: 5px;
+    font-family: inherit;
+    display: inline-block;
+}
+
 .exportdev{
     position: absolute;
     right: 80px;

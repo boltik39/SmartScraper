@@ -1,6 +1,5 @@
 from datetime import datetime
-from urllib import response
-from django.shortcuts import render, redirect
+from django.shortcuts import render
 from django.http import HttpResponse
 from django.contrib.auth.decorators import login_required
 from django.contrib.auth.models import User
@@ -10,6 +9,7 @@ from utils.Googler import Googler
 from utils.FileHelper import FileHelper
 from django.contrib.auth.views import LoginView
 from django.urls import reverse_lazy
+from .bases import DEVICE_QUERIES
 
 __DEVICE_QUERIES = []
 
@@ -34,6 +34,7 @@ def about(request):
 
 @login_required
 def scraper(request):
+    DEVICE_QUERIES[request.user.get_username()].clear()
     return render(request, 'search_result.html')
 
 @login_required
@@ -47,9 +48,9 @@ def search(request):
 
     for item in queries:
         try:
-            device_query = Device.objects.using('default').get(name=item)
-            if device_query not in __DEVICE_QUERIES:
-                __DEVICE_QUERIES.append(device_query)
+            device_query = Device.objects.get(name=item)
+            if device_query not in DEVICE_QUERIES[request.user.get_username()]:
+               DEVICE_QUERIES[request.user.get_username()].append(device_query)
         except Device.DoesNotExist:
             dicty = Googler.search_by_query(item)
             links = ""
@@ -67,13 +68,12 @@ def search(request):
                                         system_reliability=dicty['system_reliability'],
                                         score=dicty['score'], link=links)
             device_query.save(using='default')
-            __DEVICE_QUERIES.append(device_query)
-            device_query.save(using='local')
-    return render(request, 'search_result.html', {"devices": __DEVICE_QUERIES})
+            DEVICE_QUERIES[request.user.get_username()].append(device_query)
+    return render(request, 'search_result.html', {"devices": DEVICE_QUERIES[request.user.get_username()]})
 
 
 def export_devices_to_xlsx(request):
-    devices = Device.objects.using('local').all()
+    devices = DEVICE_QUERIES[request.user.get_username()]
     response = HttpResponse(
         content_type='application/vnd.openxmlformats-officedocument.spreadsheetml.sheet',)
     response['Content-Disposition'] = 'attachment; filename={time}-devices.xlsx'.format(time=datetime.now().strftime('%d-%m-%Y'),
@@ -87,5 +87,5 @@ def delete(request):
         devices_ids = request.POST.getlist('id[]')
         for id in devices_ids:
             device = Device.objects.get(pk=id)
-            device.delete(using='local')
+            DEVICE_QUERIES[request.user.get_username()].remove(device)
         return HttpResponse()

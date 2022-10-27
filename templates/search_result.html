@@ -18,6 +18,9 @@
             <input type="text" placeholder="Device" id="query" name="query" required>
             <input type="submit" id="srch" value="Search">
         </form>
+        {% if request.user.groups.all.0.name == "manufacturer" %}
+        <button class="btn_add" id="add_id">Add</button>
+        {% endif %}
         <form action="{% url 'export_devices_to_xlsx' %}" method="get">
             <button class="exportdev">Export to XLSX</button>
         </form>
