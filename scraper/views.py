@@ -1,8 +1,9 @@
 from datetime import datetime
 from urllib import response
-from django.shortcuts import render
+from django.shortcuts import render, redirect
 from django.http import HttpResponse
 from django.contrib.auth.decorators import login_required
+from django.contrib.auth.models import User
 from .forms import LoginForm
 from scraper.models import Device
 from utils.Googler import Googler
@@ -31,9 +32,11 @@ def home(request):
 def about(request):
     return render(request, 'about.html')
 
+@login_required
 def scraper(request):
     return render(request, 'search_result.html')
 
+@login_required
 def search(request):
     queries = []
     if request.method == "GET":
@@ -45,7 +48,8 @@ def search(request):
     for item in queries:
         try:
             device_query = Device.objects.using('default').get(name=item)
-            __DEVICE_QUERIES.append(device_query)
+            if device_query not in __DEVICE_QUERIES:
+                __DEVICE_QUERIES.append(device_query)
         except Device.DoesNotExist:
             dicty = Googler.search_by_query(item)
             links = ""
@@ -72,8 +76,16 @@ def export_devices_to_xlsx(request):
     devices = Device.objects.using('local').all()
     response = HttpResponse(
         content_type='application/vnd.openxmlformats-officedocument.spreadsheetml.sheet',)
-    response['Content-Disposition'] = 'attachment; filename={time}-devices.xlsx'.format(time=datetime.now().strftime('%H-%M-%S'),
+    response['Content-Disposition'] = 'attachment; filename={time}-devices.xlsx'.format(time=datetime.now().strftime('%d-%m-%Y'),
     )
     wb = FileHelper.export_products_to_xlsx(devices)
     wb.save(response)
     return response
+
+def delete(request):
+    if request.method == "POST":
+        devices_ids = request.POST.getlist('id[]')
+        for id in devices_ids:
+            device = Device.objects.get(pk=id)
+            device.delete(using='local')
+        return HttpResponse()

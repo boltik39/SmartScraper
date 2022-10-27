@@ -72,61 +72,46 @@
     background: white;
     margin-top: 5px;
     margin-left: 5px;
-      padding: 14px 20px;
-      color: black;
-      border: none;
-      cursor: pointer;
-      border-radius: 5px;
-      font-family: inherit;
-      display: inline-block;
+    padding: 14px 20px;
+    color: black;
+    border: none;
+    cursor: pointer;
+    border-radius: 5px;
+    font-family: inherit;
+    display: inline-block;
   }
 
 .exportdev{
-    position: fixed;
-    top: 83px;
-    left:5px;
-    background: rgb(142, 142, 143);
-    padding: 15px 20px;
-    color: #000;
+    position: absolute;
+    right: 80px;
+    background: white;
+    margin-top: 5px;
+    margin-right: 5px;
+    padding: 14px 20px;
+    color: black;
     border: none;
     cursor: pointer;
-    border-radius: 10px;
+    border-radius: 5px;
     font-family: inherit;
-    font-size: 30px;
-    margin-right: 15px;
-    display: inline;
+    display: inline-block;
 }
 
-.btnup{
-    position: fixed;
-    top:83px;
-    left:248px;
-    background: rgb(142, 142, 143);
-    padding: 15px 20px;
-    color: #000;
+.btn_delete{
+    position: absolute;
+    background: white;
+    right: 0;
+    margin-top: 5px;
+    margin-right: 5px;
+    margin-left: 5px;
+    padding: 14px 20px;
+    color: black;
     border: none;
     cursor: pointer;
-    border-radius: 10px;
+    border-radius: 5px;
     font-family: inherit;
-    font-size: 30px;
-    margin-right: 15px;
-    display: inline;
-
+    display: inline-block;
 }
 
-.btndn{
-    position: fixed;
-    top:83px;
-    left:308px;
-    background: rgb(142, 142, 143);
-    padding: 15px 20px;
-    color: #000;
-    border: none;
-    cursor: pointer;
-    border-radius: 10px;
-    font-family: inherit;
-    font-size: 30px;
-}
 .table{
     width: 100%;
 }
@@ -136,3 +121,7 @@
 .table tr:hover{
     background-color: #a4b4ce;
 }
+
+th, td{
+    border: 1px solid black;
+  }
