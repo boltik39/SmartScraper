@@ -23,7 +23,7 @@ python manage.py runserver
 ```
 6. Go to `http://localhost:8000/admin`
 7. Create the required number of users
-8. In `scraper/bases.py` add user to the end of `DEVICE_QUERIES` dictionary
+8. In `scraper/bases.py` add user to the end of `DEVICE_QUERIES` dictionary and specify an empty list of devices for him 
 ```
 DEVICE_QUERIES = {'user0' : empty_device_queries[0],
                   'user1' : empty_device_queries[1],
