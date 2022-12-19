@@ -1,4 +1,4 @@
-@import url("https://fonts.googleapis.com/css?family=Rubik+One&subset=latin,cyrillic");
+/* @import url("https://fonts.googleapis.com/css?family=Rubik+One&subset=latin,cyrillic");
 @import url("https://fonts.googleapis.com/css2?family=Roboto&display=swap");
 
 .body{
@@ -140,4 +140,33 @@
 
 th, td{
     border: 1px solid black;
-  }
+  } */
+
+@import url("https://fonts.googleapis.com/css?family=Rubik+One&subset=latin,cyrillic");
+@import url("https://fonts.googleapis.com/css2?family=Roboto&display=swap");
+
+.body {
+    background: rgb(228, 228, 230);
+}
+
+#container > h1 {
+    font-family: 'Rubik One', sans-serif;
+    font-size: 20px;
+    text-transform: uppercase;  
+    background: linear-gradient(45deg, #978f8f 33%, #c11111 66%, #8AA9D6);
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+    color: #0B2349;
+    display: table;
+    margin-right: 20px;
+    margin-top: 10px;
+}
+
+#table {
+    border-color: gray;
+}
+
+.cell-breakword {
+    word-wrap: break-word;
+    max-width: 370px;
+}
