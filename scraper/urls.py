@@ -11,4 +11,5 @@ urlpatterns = [
     path('admin/', admin.site.urls),
     path('excel/', views.export_devices_to_xlsx, name="export_devices_to_xlsx"),
     path('search/delete', views.delete, name="delete"),
+    path('search/add', views.add_device, name='add_device'),
 ]

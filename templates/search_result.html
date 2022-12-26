@@ -43,7 +43,7 @@
                     </form>
                     <div class="d-flex flex-wrap ps-lg-5">
                         {% if request.user.groups.all.0.name == "manufacturer" %}
-                            <button class="btn btn-light btn-sm me-2 mb-2 mt-2" id="add_id">Add</button>
+                            <button type="button" class="btn btn-light btn-sm me-2 mb-2 mt-2" id="add_id" data-bs-toggle="modal" data-bs-target="#addModal">Add</button>
                         {% endif %}
                         <form action="{% url 'export_devices_to_xlsx' %}" method="get">
                             <button class="btn btn-light btn-sm me-2 mb-2 mt-2">Export to XLSX</button>
@@ -101,47 +101,62 @@
         </table>
     </div>
 
-    <div class="modal fade" tabindex="-1" role="dialog" id="modal">
-        <div class="modal-dialog" role="document">
-          <div class="modal-content"></div>
+    <div class="modal fade" tabindex="-1" id="addModal" aria-labelledby="exampleModalLabel" aria-hidden="true">
+        <div class="modal-dialog">
+          <div class="modal-content">
+
+            <form id="addForm" method="post" action="{% url 'add_device' %}">
+                {% csrf_token %}
+
+                <div class="modal-header">
+                    <h5 class="modal-title" id="exampleModalLabel">Добавление элемента</h5>
+                    <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Закрыть"></button>
+                </div>
+
+
+                <ul class="messages" id="messages-content">
+                    {% for message in messages %}
+                        <div class="container-fluid p-0">
+                            <div class="alert {{ message.extra_tags }} alert-dismissible" role="alert">
+                                <button type="button" class="close" data-bs-dismiss="alert" aria-label="Close">
+                                    <span aria-hidden="true">×</span>
+                                </button>
+                                {{ message.message }}
+                            </div>
+                        </div>
+                    {% endfor %}
+                </ul>
+
+
+                <div class="modal-body">
+                    <div class="mb-3">
+                        <label for="FormName" class="form-label">Название оборудования</label>
+                        <input type="text" class="form-control" id="FormName" name="FormName">
+                    </div>
+    
+                    <div class="mb-3">
+                        <label for="FormMTTR" class="form-label">MTTR</label>
+                        <input type="number" min="0" class="form-control" id="FormMTTR" name="FormMTTR">
+                    </div>
+    
+                    <div class="mb-3">
+                        <label for="FormMTBF" class="form-label">MTBF</label>
+                        <input type="number" min="0" class="form-control" id="FormMTBF" name="FormMTBF">
+                    </div>
+    
+                    <div class="mb-3">
+                        <label for="FormLink" class="form-label">Link</label>
+                        <input type="url" class="form-control" id="FormLink" name="FormLink">
+                    </div>
+                <div class="modal-footer">
+                    <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Закрыть</button>
+                    <button type="submit" class="btn btn-primary" id="FormConfirm">Сохранить изменения</button>
+                </div>
+            </form>
+          </div> 
         </div>
     </div>
-
-    <script>
-        $(document).ready(function(){
-            $("#delete_id").click(function(){
-                if (confirm("Are you sure to delete these items?")){
-                    var id = [];
-                    var csrftoken = $("[name=csrfmiddlewaretoken]").val();
-                    $(':checkbox:checked').each(function(i){
-                        id[i]=$(this).val()
-                    })
-                    if (id.length==0){
-                        alert("You don't choose items. Try again.")
-                    }else{
-                        console.log(id)
-                        $.ajax({
-                            url:"delete",
-                            type:"POST",
-                            headers:{
-                            "X-CSRFToken": csrftoken
-                        },
-                            data:{
-                                id,
-                            },
-                            success:function(response){
-                                for (var i=0; i < id.length; i++){
-                                    $('tr#'+id[i]+'').css('background-color', '#ccc');
-                                    $('tr#'+id[i]+'').fadeOut('slow');
-                                }
-                            }
-                        })
-                    }
-
-                }
-            })
-        })
-    </script>
+    <script src="../static/js/search_result.js"></script>
 </body>
 </html>
 

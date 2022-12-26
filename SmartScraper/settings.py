@@ -13,6 +13,7 @@ https://docs.djangoproject.com/en/4.0/ref/settings/
 from pathlib import Path
 import os
 from pickle import APPEND
+from django.contrib.messages import constants as messages
 
 # Build paths inside the project like this: BASE_DIR / 'subdir'.
 BASE_DIR = Path(__file__).resolve().parent.parent
@@ -32,8 +33,9 @@ ALLOWED_HOSTS = ['*']
 
 # Application definition
 
-INSTALLED_APPS = [
+INSTALLED_APPS = [ 
     'bootstrap5',
+    'bootstrap_modal_forms',
     'crispy_forms',
     'crispy_bootstrap5',
     'django.contrib.admin',
@@ -88,7 +90,7 @@ DATABASES = {
         'PASSWORD': '67f7c5f54b78823f6c8d9c80b5691a77c88c82ce4da0f99a262273ae80338c33',
         'HOST': 'ec2-99-81-68-240.eu-west-1.compute.amazonaws.com',
         'PORT': '5432',
-    }, 
+        },
 }
 
 
@@ -143,3 +145,11 @@ LOGOUT_REDIRECT_URL = 'home'
 CRISPY_ALLOWED_TEMPLATE_PACKS = "bootstrap5"
 
 CRISPY_TEMPLATE_PACK = "bootstrap5"
+
+MESSAGE_TAGS = {
+        messages.DEBUG: 'alert-secondary',
+        messages.INFO: 'alert-info',
+        messages.SUCCESS: 'alert-success',
+        messages.WARNING: 'alert-warning',
+        messages.ERROR: 'alert-danger',
+}
