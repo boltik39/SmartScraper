@@ -82,10 +82,10 @@ WSGI_APPLICATION = 'SmartScraper.wsgi.application'
 # Database
 # https://docs.djangoproject.com/en/4.0/ref/settings/#databases
 
-'default': {
+DATABASES = {'default': {
         'ENGINE': 'django.db.backends.sqlite3',
         'NAME': str(os.path.join(BASE_DIR, 'db.sqlite3')),
-    }
+    }}
 
 
 # Password validation

@@ -13,7 +13,7 @@ from scraper.models import Device
 from utils.Googler import Googler
 from utils.MathCore import MathCore
 from utils.FileHelper import FileHelper
-from .forms import LoginForm, DeviceForm
+from .forms import LoginForm
 from .bases import DEVICE_QUERIES
 
 class LoginUser(LoginView):
@@ -25,12 +25,6 @@ class LoginUser(LoginView):
         return context
     def get_success_url(self):
         return reverse_lazy('scraper')
-
-class AddDeviceView(BSModalCreateView):
-    template_name = 'add_device.html'
-    form_class = DeviceForm
-    success_message = 'Success. Device was added.'
-    success_url = reverse_lazy('scraper')
 
 def home(request):
     context = {}
