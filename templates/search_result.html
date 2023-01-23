@@ -61,18 +61,17 @@
                 <tr>
                     <th scope="col"></th>
                     <th scope="col">Device</th>
-                    <th scope="col">MTTR</th>
-                    <th scope="col">MTBF</th>
-                    <th scope="col">FR</th>
+                    <th scope="col">MTTR,&nbsp;h</th>
+                    <th scope="col">MTBF,&nbsp;h</th>
+                    <th scope="col">FR,&nbsp;1&nbsp;/&nbsp;h</th>
                     <th scope="col">FR in storage mode</th>
-                    <th scope="col">Storage time</th>
-                    <th scope="col">Minimal recource</th>
-                    <th scope="col">Gamma percentage resource</th>
-                    <th scope="col">Avg resource</th>
-                    <th scope="col">Avg lifetime</th>
+                    <th scope="col">Storage time,&nbsp;h</th>
+                    <th scope="col">Minimal recource,&nbsp;h</th>
+                    <th scope="col">Gamma percentage resource,&nbsp;h</th>
+                    <th scope="col">Avg resource,&nbsp;h</th>
+                    <th scope="col">Avg lifetime,&nbsp;y</th>
                     <th scope="col">Recovery intensity</th>
                     <th scope="col">System reliability</th>
-                    <th scope="col">Score</th>
                     <th scope="col">Link</th>
                     </tr>
             </thead>
@@ -93,7 +92,6 @@
                     <td>{{ item.average_lifetime }}</td>
                     <td>{{ item.recovery_intensity }}</td>
                     <td>{{ item.system_reliability }}</td>
-                    <td>{{ item.score }}</td>
                     <td>{{ item.link }}</td>
                 </tr>
                 {% endfor %}

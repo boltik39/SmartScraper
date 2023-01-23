@@ -78,7 +78,8 @@ class StringHelper:
         names_mtbf = ['mtbf', 'mttf',
                       'mean time between',
                       'mean time between failures',
-                      'mean time between failure', ]
+                      'mean time between failure',
+                      'fault interval']
         names_mttr = ['mttr',
                       'mean time to',
                       'mean time to repair',

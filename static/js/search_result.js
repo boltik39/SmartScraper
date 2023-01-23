@@ -56,6 +56,9 @@ $(document).ready(function(){ /// delete func
                             $('tr#'+id[i]+'').css('background-color', '#ccc');
                             $('tr#'+id[i]+'').fadeOut('slow');
                         }
+			$("#checkAll").click(function(){
+    $('input:checkbox').not(this).prop('checked', this.checked);
+});
                     }
                 })
             }

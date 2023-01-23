@@ -1,4 +1,5 @@
 import json
+from decimal import Decimal
 from datetime import datetime
 from django.shortcuts import render
 from django.http import HttpResponse
@@ -60,8 +61,8 @@ def search(request):
             for link in dicty["links"]:
                 links += link + "; "
             device_query = Device(name=dicty['name'], mttr=dicty['mttr'], 
-                                        mtbf=dicty['mtbf'], failure_rate=dicty['failure_rate'],
-                                        failure_rate_in_storage_mode=dicty['failure_rate_in_storage_mode'],
+                                        mtbf=dicty['mtbf'], failure_rate='%.2E' % Decimal(dicty['failure_rate']),
+                                        failure_rate_in_storage_mode='%.2E' % Decimal(dicty['failure_rate_in_storage_mode']),
                                         storage_time=dicty['storage_time'],
                                         minimal_resource=dicty['minimal_resource'],
                                         gamma_percentage_resource=dicty['gamma_percentage_resource'],
@@ -108,8 +109,8 @@ def add_device(request):
             new_dict = MathCore.calculate_param(device_dict)
             new_dict["name"] = name
             device_query = Device(name=new_dict['name'], mttr=new_dict['MTTR'], 
-                                        mtbf=new_dict['MTBF'], failure_rate=new_dict['Failure rate'],
-                                        failure_rate_in_storage_mode=new_dict['failure rate in storage mode'],
+                                        mtbf=new_dict['MTBF'], failure_rate='%.2E' % Decimal(dicty['failure_rate']),
+                                        failure_rate_in_storage_mode='%.2E' % Decimal(dicty['failure_rate_in_storage_mode']),
                                         storage_time=new_dict['Storage time'],
                                         minimal_resource=new_dict['Minimal resource'],
                                         gamma_percentage_resource=new_dict['Gamma percentage resource'],

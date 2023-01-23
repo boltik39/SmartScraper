@@ -22,6 +22,7 @@ class Pars:
             'mean time between',
             'mean time between failures',
             'mean time between failure',
+            'fault interval'
         ]
     ).interpretation(
         RULE.name
@@ -87,6 +88,7 @@ class Pars:
                 'mean time between',
                 'mean time between failures',
                 'mean time between failure',
+                'fault interval'
             ]
         ).interpretation(
             RULE.name
@@ -216,6 +218,5 @@ class Pars:
             except:
                 print(
                     'Yargy failure: you normally don`t need to report that to us.')
-        print(LIST)
         f.close()
         return LIST
