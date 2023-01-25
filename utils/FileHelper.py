@@ -91,7 +91,6 @@ class FileHelper:
             'Average lifetime',
             'Recovery intensity',
             'System reliability',
-            'Score',
             'Link'
         ]
 
@@ -117,7 +116,6 @@ class FileHelper:
                 device.average_lifetime,
                 device.recovery_intensity,
                 device.system_reliability,
-                device.score,
                 device.link,
             ]
 

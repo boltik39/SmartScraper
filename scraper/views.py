@@ -109,8 +109,8 @@ def add_device(request):
             new_dict = MathCore.calculate_param(device_dict)
             new_dict["name"] = name
             device_query = Device(name=new_dict['name'], mttr=new_dict['MTTR'], 
-                                        mtbf=new_dict['MTBF'], failure_rate='%.2E' % Decimal(dicty['failure_rate']),
-                                        failure_rate_in_storage_mode='%.2E' % Decimal(dicty['failure_rate_in_storage_mode']),
+                                        mtbf=new_dict['MTBF'], failure_rate='%.2E' % Decimal(new_dict['Failure rate']),
+                                        failure_rate_in_storage_mode='%.2E' % Decimal(new_dict['failure rate in storage mode']),
                                         storage_time=new_dict['Storage time'],
                                         minimal_resource=new_dict['Minimal resource'],
                                         gamma_percentage_resource=new_dict['Gamma percentage resource'],
