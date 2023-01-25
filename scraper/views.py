@@ -105,7 +105,7 @@ def add_device(request):
         except Device.DoesNotExist:
             device_dict["MTTR"] = float(request.POST["FormMTTR"])
             device_dict["MTBF"] = float(request.POST["FormMTBF"])
-            device_dict["Links"] = [request.POST["FormLink"]]
+            device_dict["Links"] = request.POST["FormLink"]
             new_dict = MathCore.calculate_param(device_dict)
             new_dict["name"] = name
             device_query = Device(name=new_dict['name'], mttr=new_dict['MTTR'], 
