@@ -115,10 +115,12 @@ $(document).ready(function(){
                             $('tr#'+id[i]+'').css('background-color', '#ccc');
                             $('tr#'+id[i]+'').fadeOut('slow');
                         }
-		            	$("#checkAll").click(function(){
-                            $('input:checkbox').not(this).prop('checked', this.checked);
-                        });
-                    }
+		            	var get= document.getElementsByName('item');
+                        console.log(get);
+                        for(var i= 0; i<get.length; i++){
+                            console.log('k');
+                            get[i].checked= false;}
+                        }
                 })
             }
         }
