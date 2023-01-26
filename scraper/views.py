@@ -2,11 +2,10 @@ import json
 from decimal import Decimal
 from datetime import datetime
 from django.shortcuts import render
-from django.http import HttpResponse
+from django.http import HttpResponse, JsonResponse
 from django.contrib import messages
 from django.contrib.auth.decorators import login_required
 from django.contrib.auth.views import LoginView
-from django.template import RequestContext
 from django.template.loader import render_to_string
 from django.urls import reverse_lazy
 from bootstrap_modal_forms.generic import BSModalCreateView
@@ -28,21 +27,26 @@ class LoginUser(LoginView):
         return reverse_lazy('scraper')
 
 def home(request):
+    """Rendering logging page"""
     context = {}
     context['form'] = LoginForm()
     return render(request, 'login.html', context)
-
 
 def about(request):
     return render(request, 'about.html')
 
 @login_required
 def scraper(request):
+    """Rendering main page of web-scraper"""
     DEVICE_QUERIES[request.user.get_username()].clear()
     return render(request, 'search_result.html')
 
 @login_required
 def search(request):
+    """
+    Handles request, getting queries from database or scraping from internet by entering to database.
+    Returns a response using json that contains device reliability metrics.
+    """
     queries = []
     if request.method == "GET":
         query = request.GET['query']
@@ -73,10 +77,18 @@ def search(request):
                                         score=dicty['score'], link=links)
             device_query.save(using='default')
             DEVICE_QUERIES[request.user.get_username()].append(device_query)
-    return render(request, 'search_result.html', {"devices": DEVICE_QUERIES[request.user.get_username()]})
-
+        finally:
+            data = {}
+            context = {
+                'devices' : DEVICE_QUERIES[request.user.get_username()],
+            }
+            data = {'rendered_data' : render_to_string('table_devices.html', context=context)}
+    return HttpResponse(json.dumps(data, ensure_ascii=False), content_type="application/json")
 
 def export_devices_to_xlsx(request):
+    """
+    Exporting device's info to xlsx
+    """
     devices = DEVICE_QUERIES[request.user.get_username()]
     response = HttpResponse(
         content_type='application/vnd.openxmlformats-officedocument.spreadsheetml.sheet',)
@@ -87,6 +99,9 @@ def export_devices_to_xlsx(request):
     return response
 
 def delete(request):
+    """
+    Deleting devices from user's query list
+    """
     if request.method == "POST":
         devices_ids = request.POST.getlist('id[]')
         for id in devices_ids:
@@ -95,6 +110,10 @@ def delete(request):
         return HttpResponse()
 
 def add_device(request):
+    """
+    Accepts posted data with device's info, calculates remaining parameters, enters to database.
+    Returns a message about the status of the process.
+    """
     if request.method == "POST":
         device_dict = {}
         name = request.POST["FormName"]
@@ -129,6 +148,5 @@ def add_device(request):
                     "message": message.message,
                     "extra_tags": message.tags,
                 })
-                        
             data['messages'] = django_messages
         return HttpResponse(json.dumps(data, ensure_ascii=False), content_type="application/json")

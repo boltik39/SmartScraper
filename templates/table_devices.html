@@ -1,0 +1,20 @@
+{% block content %}
+{% for item in devices %}
+    <tr id="{{item.pk}}">
+        <th scope="row"><input type="checkbox" name="item" value="{{ item.pk }}"></th>
+        <td>{{ item.name }}</td>
+        <td>{{ item.mttr }}</td>
+        <td>{{ item.mtbf }}</td>
+        <td>{{ item.failure_rate }}</td>
+        <td>{{ item.failure_rate_in_storage_mode }}</td>
+        <td>{{ item.storage_time }}</td>
+        <td>{{ item.minimal_resource }}</td>
+        <td>{{ item.gamma_percentage_resource }}</td>
+        <td>{{ item.average_resource }}</td>
+        <td>{{ item.average_lifetime }}</td>
+        <td>{{ item.recovery_intensity }}</td>
+        <td>{{ item.system_reliability }}</td>
+        <td>{{ item.link }}</td>
+    </tr>
+{% endfor %}
+{% endblock %}
