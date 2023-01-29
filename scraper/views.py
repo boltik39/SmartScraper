@@ -32,9 +32,6 @@ def home(request):
     context['form'] = LoginForm()
     return render(request, 'login.html', context)
 
-def about(request):
-    return render(request, 'about.html')
-
 @login_required
 def scraper(request):
     """Rendering main page of web-scraper"""
