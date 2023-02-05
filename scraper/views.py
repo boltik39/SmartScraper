@@ -58,9 +58,6 @@ def search(request):
                DEVICE_QUERIES[request.user.get_username()].append(device_query)
         except Device.DoesNotExist:
             dicty = Googler.search_by_query(item)
-            links = ""
-            for link in dicty["links"]:
-                links += link + "; "
             device_query = Device(name=dicty['name'], mttr=dicty['mttr'], 
                                         mtbf=dicty['mtbf'], failure_rate='%.2E' % Decimal(dicty['failure_rate']),
                                         failure_rate_in_storage_mode='%.2E' % Decimal(dicty['failure_rate_in_storage_mode']),
@@ -71,11 +68,20 @@ def search(request):
                                         average_lifetime=dicty['average_lifetime'],
                                         recovery_intensity=dicty['recovery_intensity'],
                                         system_reliability=dicty['system_reliability'],
-                                        score=dicty['score'], link=links)
+                                        score=dicty['score'], link=dicty['links'])
             device_query.save(using='default')
             DEVICE_QUERIES[request.user.get_username()].append(device_query)
         finally:
             data = {}
+            for lnk in DEVICE_QUERIES[request.user.get_username()]:
+                lnk.failure_rate = '%.2E' % Decimal(lnk.failure_rate)
+                lnk.failure_rate_in_storage_mode='%.2E' % Decimal(lnk.failure_rate_in_storage_mode)
+                if isinstance(lnk.link, str):
+                    raw_links = lnk.link[1:-1].split(", ")
+                    rendered_links = []
+                    for _ in raw_links:
+                        rendered_links.append(_[1:-1])
+                    lnk.link = rendered_links
             context = {
                 'devices' : DEVICE_QUERIES[request.user.get_username()],
             }

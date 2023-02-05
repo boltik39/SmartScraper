@@ -14,7 +14,11 @@
         <td>{{ item.average_lifetime }}</td>
         <td>{{ item.recovery_intensity }}</td>
         <td>{{ item.system_reliability }}</td>
-        <td>{{ item.link }}</td>
+        <td>
+            {% for link in item.link %}
+                {{ link|urlizetrunc:30 }} <br>
+            {% endfor %}
+        </td>
     </tr>
 {% endfor %}
 {% endblock %}
