@@ -1,7 +1,7 @@
 {% block content %}
 {% for item in devices %}
     <tr id="{{item.pk}}">
-        <th scope="row"><input type="checkbox" name="item" value="{{ item.pk }}"></th>
+        <th scope="row"><input type="checkbox" name="item" id="item" value="{{ item.pk }}"></th>
         <td>{{ item.name }}</td>
         <td>{{ item.mttr }}</td>
         <td>{{ item.mtbf }}</td>

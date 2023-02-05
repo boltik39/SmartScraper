@@ -94,8 +94,11 @@ $(document).ready(function(){
         if (confirm("Are you sure to delete these items?")){
             var id = [];
             var csrftoken = $("[name=csrfmiddlewaretoken]").val();
-            $(':checkbox:checked').each(function(i){
-                id[i]=$(this).val()
+            $('#item:checked').each(function(i){
+                if ($(this).val() != "on"){
+                    console.log($(this).val());
+                    id[i]=$(this).val()
+                }
             })
             if (id.length==0){
                 alert("You don't choose items. Try again.")
@@ -120,9 +123,23 @@ $(document).ready(function(){
                         for(var i= 0; i<get.length; i++){
                             console.log('k');
                             get[i].checked= false;}
+                        $('#select-all').prop('checked', false);
                         }
                 })
             }
         }
     })
 })
+
+/// select/deselect all checkboxes
+$('#select-all').click(function(event) {   
+    if(this.checked) {
+        $(':checkbox').each(function() {
+            this.checked = true;                        
+        });
+    } else {
+        $(':checkbox').each(function() {
+            this.checked = false;                       
+        });
+    }
+}); 
