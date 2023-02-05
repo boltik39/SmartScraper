@@ -25,6 +25,12 @@ $(frm_srch).submit(function (e) {
         },
         success:function(data){
             $("#content").html(data.rendered_data);
+            $('a').each(function() {
+                if ($(this).text().length > 30) {
+                    console.log($(this).text());
+                    $(this).text( $(this).text().substring(0, 30) + '…');
+                }
+            });
         },
         error:function(data){
             console.log('error')
@@ -56,6 +62,12 @@ $(frm_file_srch).submit(function (e) {
         },
         success:function(data){
             $("#content").html(data.rendered_data);
+            $('a').each(function() {
+                if ($(this).text().length > 30) {
+                    console.log($(this).text());
+                    $(this).text( $(this).text().substring(0, 30) + '…');
+                }
+            });
         },
         error:function(data){
             console.log('error')

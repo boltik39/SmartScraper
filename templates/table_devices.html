@@ -16,7 +16,7 @@
         <td>{{ item.system_reliability }}</td>
         <td>
             {% for link in item.link %}
-                {{ link|urlizetrunc:30 }} <br>
+                <a href={{ link }} target="_blank">{{ link }}</a><br>
             {% endfor %}
         </td>
     </tr>
