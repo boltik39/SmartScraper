@@ -2,13 +2,13 @@ import json
 from decimal import Decimal
 from datetime import datetime
 from django.shortcuts import render
-from django.http import HttpResponse, JsonResponse
+from django.http import HttpResponse
 from django.contrib import messages
+from django.contrib.auth import logout
 from django.contrib.auth.decorators import login_required
 from django.contrib.auth.views import LoginView
 from django.template.loader import render_to_string
 from django.urls import reverse_lazy
-from bootstrap_modal_forms.generic import BSModalCreateView
 from scraper.models import Device
 from utils.Googler import Googler
 from utils.MathCore import MathCore
@@ -26,8 +26,18 @@ class LoginUser(LoginView):
     def get_success_url(self):
         return reverse_lazy('scraper')
 
+def UserLoggedIn(request):
+    if request.user.is_authenticated:
+        username = request.user.username
+    else:
+        username = None
+    return username
+
 def home(request):
     """Rendering logging page"""
+    username = UserLoggedIn(request)
+    if username:
+        logout(request)
     context = {}
     context['form'] = LoginForm()
     return render(request, 'login.html', context)
