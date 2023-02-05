@@ -27,28 +27,28 @@
                                 <input class="form-control form-control-dark form-control-sm" type="file" title="Upload excel file" name="excel_file" id="id_excel_file" required>
                             </div>
                             <div class="col-auto">
-                                <button type="submit" class="btn btn-light btn-sm" id="upld" value="Upload">Upload</button>
+                                <button type="submit" class="btn btn-light btn-sm" id="upld" value="Upload">Загрузить</button>
                             </div>
                         </div>
                     </form>
                     <form class="col-12 col-lg-auto me-lg-auto mb-2 justify-content-center mb-md-0" action="{% url 'search' %}" method="get" id="query-form">
                         <div class="row g-2 align-items-center justify-content-center">
                             <div class="col-auto">
-                                <input type="text" class="form-control form-control-dark form-control-sm" placeholder="Device" id="query" name="query" required>
+                                <input type="text" class="form-control form-control-dark form-control-sm" placeholder="Название" id="query" name="query" required>
                             </div>
                             <div class="col-auto">
-                                <button type="submit" class="btn btn-light btn-sm" id="srch" value="Search">Search</button>
+                                <button type="submit" class="btn btn-light btn-sm" id="srch" value="Search">Поиск</button>
                             </div>
                         </div>
                     </form>
                     <div class="d-flex flex-wrap ps-lg-5">
                         {% if request.user.groups.all.0.name == "manufacturer" %}
-                            <button type="button" class="btn btn-light btn-sm me-2 mb-2 mt-2" id="add_id" data-bs-toggle="modal" data-bs-target="#addModal">Add</button>
+                            <button type="button" class="btn btn-light btn-sm me-2 mb-2 mt-2" id="add_id" data-bs-toggle="modal" data-bs-target="#addModal">Добавить</button>
                         {% endif %}
                         <form action="{% url 'export_devices_to_xlsx' %}" method="get">
-                            <button class="btn btn-light btn-sm me-2 mb-2 mt-2">Export to XLSX</button>
+                            <button class="btn btn-light btn-sm me-2 mb-2 mt-2">Экспорт в excel</button>
                         </form>
-                        <button class="btn btn-light btn-sm me-2 mb-2 mt-2" id="delete_id">Delete</button>
+                        <button class="btn btn-light btn-sm me-2 mb-2 mt-2" id="delete_id">Удалить</button>
                     </div>
                 </div>
             </div>
@@ -60,7 +60,7 @@
             <thead>
                 <tr>
                     <th scope="col"></th>
-                    <th scope="col">Device</th>
+                    <th scope="col">Название</th>
                     <th scope="col">MTTR,&nbsp;h</th>
                     <th scope="col">MTBF,&nbsp;h</th>
                     <th scope="col">FR,&nbsp;1&nbsp;/&nbsp;h</th>
@@ -132,7 +132,7 @@
                     </div>
     
                     <div class="mb-3">
-                        <label for="FormLink" class="form-label">Link</label>
+                        <label for="FormLink" class="form-label">Ссылка</label>
                         <input type="url" class="form-control" id="FormLink" name="FormLink">
                     </div>
                 <div class="modal-footer">
