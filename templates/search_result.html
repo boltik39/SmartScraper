@@ -61,22 +61,22 @@
     <div class="table-responsive">
         <table id="table" class="table table-hover table-bordered">
             <thead>
-                <tr>
+                <tr id="header-tr">
                     <th scope="col"><input type="checkbox" name="select-all" id="select-all"></th>
                     <th scope="col">Название</th>
-                    <th title="Среднее время восстановления, ч" scope="col">Среднее время восстановления, ч</th>
-                    <th title="Средняя наработка на отказ, ч" scope="col">Средняя наработка на отказ, ч</th>
-                    <th title="Средняя интенсивность отказов, 1 / ч" scope="col">Средняя интенсивность отказов, 1 / ч</th>
-                    <th title="Интенсивность отказов в режиме хранения" scope="col">Интенсивность отказов в режиме хранения</th>
-                    <th title="Средний срок сохраняемости, ч" scope="col">Средний срок сохраняемости, ч</th>
-                    <th title="Минимальный ресурс, ч" scope="col">Минимальный ресурс, ч</th>
-                    <th title="Гамма-процентный ресурс, ч" scope="col">Гамма-процентный ресурс, ч</th>
-                    <th title="Средний ресурс, ч" scope="col">Средний ресурс, ч</th>
-                    <th title="Средний срок службы, г" scope="col">Средний срок службы, г</th>
-                    <th title="Интенсивность восстановления" scope="col">Интенсивность восстановления</th>
-                    <th title="Надежность системы" scope="col">Надежность системы</th>
+                    <th scope="col">Среднее время восстановления, ч</th>
+                    <th scope="col">Средняя наработка на отказ, ч</th>
+                    <th scope="col">Средняя интенсивность отказов, 1 / ч</th>
+                    <th scope="col">Интенсивность отказов в режиме хранения</th>
+                    <th scope="col">Средний срок сохраняемости, ч</th>
+                    <th scope="col">Минимальный ресурс, ч</th>
+                    <th scope="col">Гамма-процентный ресурс, ч</th>
+                    <th scope="col">Средний ресурс, ч</th>
+                    <th scope="col">Средний срок службы, г</th>
+                    <th scope="col">Интенсивность восстановления</th>
+                    <th scope="col">Надежность системы</th>
                     <th scope="col">Ссылка</th>
-                    </tr>
+                </tr>
             </thead>
             <tbody id="content">
                 {% csrf_token %}
