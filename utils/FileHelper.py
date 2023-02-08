@@ -79,19 +79,19 @@ class FileHelper:
         worksheet.title = 'Devices'
 
         columns = [
-            'Name',
-            'MTTR',
-            'MTBF',
-            'Failure rate',
-            'Failure rate in storage mode',
-            'Storage time',
-            'Minimal resource',
-            'Gamma percentage resource',
-            'Average resource',
-            'Average lifetime',
-            'Recovery intensity',
-            'System reliability',
-            'Link'
+            'Название',
+            'Среднее время восстановления, ч',
+            'Средняя наработка на отказ, ч',
+            'Средняя интенсивность отказов, 1 / ч',
+            'Интенсивность отказов в режиме хранения',
+            'Средний срок сохраняемости, ч',
+            'Минимальный ресурс, ч',
+            'Гамма-процентный ресурс, ч',
+            'Средний ресурс, ч',
+            'Средний срок службы, г',
+            'Интенсивность восстановления',
+            'Надежность системы',
+            'Ссылка'
         ]
 
         row_num = 1
@@ -116,7 +116,7 @@ class FileHelper:
                 device.average_lifetime,
                 device.recovery_intensity,
                 device.system_reliability,
-                device.link,
+                ','.join(device.link),
             ]
 
             for col_num,cell_value in enumerate(row, 1):
