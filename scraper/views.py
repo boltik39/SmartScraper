@@ -92,6 +92,8 @@ def search(request):
                     for _ in raw_links:
                         rendered_links.append(_[1:-1])
                     lnk.link = rendered_links
+                lnk.recovery_intensity = '%.6f' % Decimal(lnk.recovery_intensity)
+                lnk.system_reliability = '%.6f' % Decimal(lnk.system_reliability)
             context = {
                 'devices' : DEVICE_QUERIES[request.user.get_username()],
             }
